@@ -14,8 +14,11 @@ def menu():
 
 
 def check_len_text_input(text, n):
-    text = input('Введите тескт: ')
-    return text
+    while len(text) <= n:
+        print(f'Текст должен быть больше {n} символов\n')
+        text = input('Введите тескт: ')
+    else:
+        return text
 
 
 def goodbuy():
