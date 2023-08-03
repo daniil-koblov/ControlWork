@@ -2,7 +2,7 @@ from datetime import datetime
 import uuid
 
 class Note:
-    def __record__ (self, id = str(uuid.uuid1())[0:501], title = "заголовок", body = "текст", date = str(datetime.now().strftime("%d.%m.%Y %H:%M:%S"))):
+    def __record__ (self, id = str(uuid.uuid1())[0:5], title = "заголовок", body = "текст", date = str(datetime.now().strftime("%d.%m.%Y %H:%M:%S"))):
         self.id = id
         self.title = title
         self.body = body
