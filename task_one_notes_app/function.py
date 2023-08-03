@@ -6,7 +6,7 @@ min_size_body = 6
 
 
 def add():
-    note = ui.create_note(min_num_body)
+    note = ui.create_note(min_size_body)
     array = file_operation.read_file()
     for notes in array:
         if Note.Note.get_id(note) == Note.Note.get_id(notes):
@@ -44,7 +44,7 @@ def id_edit_del_show(text):
         if id == Note.Note.get_id(notes):
             logic = False
             if text == 'edit':
-                note = ui.create_note(min_num_body)
+                note = ui.create_note(min_size_body)
                 Note.Note.set_title(notes, note.get_title())
                 Note.Note.set_body(notes, note.get_body())
                 Note.Note.set_date(notes)
