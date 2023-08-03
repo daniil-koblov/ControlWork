@@ -1,4 +1,4 @@
-
+import operation
 import Note
 import ui
 
@@ -7,18 +7,18 @@ number = 6  # сколько знаков МИНИМУМ может быть в 
 
 def add():
     note = ui.create_note(number)
-    array = operation_with_file.read_file()
+    array = operation.read_file()
     for notes in array:
         if Note.Note.get_id(note) == Note.Note.get_id(notes):
             Note.Note.set_id(note)
     array.append(note)
-    operation_with_file.write_file(array, 'a')
+    operation.write_file(array, 'a')
     print('Заметка добавлена...')
 
 
 def show(text):
     logic = True
-    array = operation_with_file.read_file()
+    array = operation.read_file()
     if text == 'date':
         date = input('Введите дату в формате dd.mm.yyyy: ')
     for notes in array:
@@ -38,7 +38,7 @@ def show(text):
 
 def id_edit_del_show(text):
     id = input('Введите id необходимой заметки: ')
-    array = operation_with_file.read_file()
+    array = operation.read_file()
     logic = True
     for notes in array:
         if id == Note.Note.get_id(notes):
@@ -56,4 +56,4 @@ def id_edit_del_show(text):
                 print(Note.Note.map_note(notes))
     if logic == True:
         print('Такой заметки нет, возможно, вы ввели неверный id')
-    operation_with_file.write_file(array, 'a')
+    operation.write_file(array, 'a')
