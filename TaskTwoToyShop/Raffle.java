@@ -3,7 +3,10 @@ package TaskTwoToyShop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Raffle {
 
@@ -13,14 +16,14 @@ public class Raffle {
     private static int idCounter = 0;
 
     public void addToy() {
-        Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in, "UTF-8");
         String title;
         int frequency;
         while (true) {
             System.out.print("Введите имя игрушки: ");
             title = scan.nextLine();
             if (title.isEmpty()) {
-                System.out.println("Пустое значение. Повторите ввод");
+                System.out.println("Некорректное значение. Повторите ввод.");
                 break;
             }
             System.out.print("Введите вероятность выпадения: ");
@@ -28,15 +31,15 @@ public class Raffle {
             if (isDigit(value)) {
                 frequency = Integer.parseInt(value);
                 if (frequency <= 0) {
-                    System.out.println("Значение должно быть больше нуля. Повторите ввод.");
+                    System.out.println("Некорректное значение. Повторите ввод.");
                 } else {
                     Toy toy = new Toy(idCounter, title, frequency);
                     if (!toys.contains(toy) || toys.size() == 0) {
                         idCounter++;
                         toys.add(toy);
-                        System.out.println("Новая игрушка добавлена.");
+                        System.out.println("Новая игрушка добавлена");
                     } else {
-                        System.out.println("Эта игрушка уже была добавлена.");
+                        System.out.println("Эта игрушка уже была добавлена ранее.");
                     }
                 }
             } else {
@@ -44,34 +47,32 @@ public class Raffle {
             }
             break;
         }
-        scan.close();
     }
 
     public void setFrequency() {
-        Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in, "UTF-8");
         System.out.print("Введите id игрушки: ");
         String value = scan.nextLine();
         if (isDigit(value)) {
             int selectedId = Integer.parseInt(value);
             if (selectedId >= 0 && selectedId < toys.size()) {
                 System.out.println("Игрушка " + toys.get(selectedId).getToyTitle() +
-                        " имеет вероятность выпадения " + toys.get(selectedId).getFrequencyFallToy());
+                        " ее вероятность выпадения " + toys.get(selectedId).getFrequencyFallToy());
                 System.out.print("Введите новую вероятность выпадения: ");
                 value = scan.nextLine();
                 if (isDigit(value)) {
                     int newFrequency = Integer.parseInt(value);
                     toys.get(selectedId).setFrequencyFallToy(newFrequency);
-                    System.out.println("Вероятность изменена.");
+                    System.out.println("Вероятность выпадения изменена.");
                 } else {
                     System.out.println("Некорректное значение. Повторите ввод.");
                 }
             } else {
-                System.out.println("В списке нет игрушки с таким id.");
+                System.out.println("Игрушки с таким id нет.");
             }
         } else {
             System.out.println("Некорректное значение. Повторите ввод.");
         }
-        scan.close();
     }
 
     private static boolean isDigit(String s) throws NumberFormatException {
@@ -99,10 +100,10 @@ public class Raffle {
     public void raffle() {
         if (toys.size() >= 2) {
             Toy prize = getPrize();
-            System.out.println("Выпавшая игрушка: " + prize.getToyTitle());
+            System.out.println("Приз: " + prize.getToyTitle());
             saveResult(prize.getInfo());
         } else {
-            System.out.println("Вы должны добавить в список минимум 2 игрушки.");
+            System.out.println("Вы должны добавить минимум две игрушки.");
         }
     }
 

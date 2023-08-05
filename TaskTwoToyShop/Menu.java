@@ -5,28 +5,24 @@ import java.util.Scanner;
 public class Menu {
     public static void main(String[] args) {
         Raffle r = new Raffle();
-        Scanner option = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in, "UTF-8");
         while (true) {
-            System.out.print("""
-                    Main menu:
-                    1 - Добавьте новую игрушку.
-                    2 - Измените частоту выпадения какой-нибудь игрушки.
-                    3 - Проведите розыгрыш игрушек и сохраните результат в файл.
-                    0 - Выход.
-                    >\s""");
-            String selection = option.next();
+            System.out.print("Меню работы приложения розыгрыша:\n"
+                    + "1 - Добавление новой игрушки в список.\n"
+                    + "2 - Изменение вероятности выпадения какой-нибуди игрушки.\n"
+                    + "3 - Произведение розыгрыша игрушек\n"
+                    + "0 - Завершение розыгрыша.\n");
+            var selection = sc.next();
             switch (selection) {
                 case "1" -> r.addToy();
                 case "2" -> r.setFrequency();
                 case "3" -> r.raffle();
                 case "0" -> {
-                    System.out.println("Розыгрыш закончен. Результат в файле.");
+                    System.out.println("Работа окончена.");
                     System.exit(0);
                 }
-                default -> System.out.println("Не корректный выбор. Проведите повторно.");
+                default -> System.out.println("Incorrect selection. Try again.");
             }
-            option.close();
         }
-        
     }
 }
